@@ -8,18 +8,15 @@ import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { fetchInvoicesPages } from "@/app/lib/data";
  
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams?: {
+export default async function Page(props: {
+  searchParams?: Promise<{
     query?: string;
     page?: string;
-  };
-}){
-  const params = await searchParams; // WAJIB di-`await` di Next.js App Router
-  const query = params?.query ?? '';
-  const currentPage = Number(params?.page) || 1;
-
+  }>;
+}) {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
   const totalPages = await fetchInvoicesPages(query);
   return (
     <div className="w-full">
@@ -41,16 +38,18 @@ export default async function Page({
 }
 
 
-
-// export default async function Page(props: {
-//   searchParams?: Promise<{
+// export default async function Page({
+//   searchParams,
+// }: {
+//   searchParams?: {
 //     query?: string;
 //     page?: string;
-//   }>;
-// }) {
-//   const searchParams = await props.searchParams;
-//   const query = searchParams?.query || '';
-//   const currentPage = Number(searchParams?.page) || 1;
+//   };
+// }){
+//   const params = await searchParams; // WAJIB di-`await` di Next.js App Router
+//   const query = params?.query ?? '';
+//   const currentPage = Number(params?.page) || 1;
+
 //   const totalPages = await fetchInvoicesPages(query);
 //   return (
 //     <div className="w-full">
@@ -70,3 +69,6 @@ export default async function Page({
 //     </div>
 //   );
 // }
+
+
+
