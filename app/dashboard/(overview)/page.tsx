@@ -6,7 +6,13 @@ import { Suspense } from 'react';
 import { RevenueChartSkeleton } from '@/app/ui/skeletons';
 import { LatestInvoicesSkeleton } from '@/app/ui/skeletons';
 import { CardsSkeleton } from '@/app/ui/skeletons';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'The official Next.js Course Dashboard, built with App Router',
+  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+};
 
 export default async function Page() {
    
