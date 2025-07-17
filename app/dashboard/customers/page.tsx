@@ -1,4 +1,6 @@
 import { Metadata } from 'next'; 
+import  CustomersTable  from '@/app/ui/customers/table';
+import { fetchAllCustomers } from '@/app/lib/data';
 
 export const metadata: Metadata = {
     title: 'Customers',
@@ -6,6 +8,11 @@ export const metadata: Metadata = {
     metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };
 
-export default function Page(){
-    return <p>Customers Page</p>
+export default async function Page(){
+    const customers = await fetchAllCustomers();
+    return (
+      <>
+        <CustomersTable customers={customers}  />
+      </>
+    )
 }
