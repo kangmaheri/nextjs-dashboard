@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import  CustomersTable  from '@/app/ui/customers/table';
 import { fetchAllCustomers } from '@/app/lib/data';
 import { Suspense } from 'react';
+import { TableRowSkeleton } from '@/app/ui/skeletons';
 
 export const metadata: Metadata = {
     title: 'Customers',
@@ -12,10 +13,8 @@ export const metadata: Metadata = {
 export default async function Page(){
     const customers = await fetchAllCustomers();
     return (
-      <>
-        <Suspense fallback={<p>Loading customers...</p>}>
+        <Suspense fallback={<TableRowSkeleton />}>
           <CustomersTable customers={customers} />
         </Suspense>
-      </>
     )
 }
